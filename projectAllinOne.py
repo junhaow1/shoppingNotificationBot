@@ -124,7 +124,7 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
 
     # below is plain text email message
 
-    message = """Subject: {} price dropped!!!
+    message = """Subject: {} - price dropped!!!
 
     
     The lowest price is {}
