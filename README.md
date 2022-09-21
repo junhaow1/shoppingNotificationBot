@@ -25,8 +25,7 @@ I input several parameters to the python function
 4. google shopping URL of the product(as following graph)
 
 
-[image1.png
-](https://github.com/junhaow1/shoppingNotificationBot/blob/main/image1.png?raw=true)
+![alt text](https://github.com/junhaow1/shoppingNotificationBot/blob/main/image1.png?raw=true)
 
 ## Result
 
