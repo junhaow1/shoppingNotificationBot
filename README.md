@@ -1,17 +1,31 @@
-# Shopping Notification Bot
+## What the code does
 
-### SE interest , experience
+The shopping notification bot could automatically scrape websites for a specific product, monitors the price and send users an email when the price drops to the user’s budget.  
 
-full-stack 
+For example I wanna buy an airpods pro. 
 
-front-end, backend 
+I input several parameters to the python function 
 
-### What I could bring to the team
+`def project(priceNotification, priceBottom, email_address, shopping_url):`
 
-agile knowledge to make the team better
+1. priceNotification = 350 
+    
+    This is my budget price, I’d like to buy under 350 dollars 
+    
+2. priceBottom = 200
+    
+    This is a price to filter fake or used/second-hand products
+    
+3. email_address = kevinwjh520@gmail.com
+    
+    Just put the receriver email address here
+    
+4. google shopping URL of the product(as following graph)
 
-excellent team player, bring enthusiasm, high productivity 
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7ae9f9a9-6a52-474c-8669-380b038ff8f0/Untitled.png)
 
-### Code demo
+### Result
 
-You code demo should comprise a code you have written or contributed to that you will run to show your coding skills and what was achieved, with a repo that you can share with us. The demo should be quick to run and can be quite simple. Your repo should be self sufficient, i.e. include any sample data and have a brief README outlining what the code does and how to use it, what result is expected, and if relevant any references for algorithms or research used.
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/329ad143-17da-474b-8a7b-0404b8a2d76d/Untitled.png)
+
+received an email including the product price and purchase link
