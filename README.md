@@ -29,6 +29,6 @@ I input several parameters to the python function
 
 ## Result
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/329ad143-17da-474b-8a7b-0404b8a2d76d/Untitled.png)
+![alt text](https://github.com/junhaow1/shoppingNotificationBot/blob/main/image2.png?raw=true)
 
 received an email including the product price and purchase link
