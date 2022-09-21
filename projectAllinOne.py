@@ -9,29 +9,6 @@ import pandas as pd
 import smtplib, ssl
 
 
-def send_email(user, pwd, recipient, subject, body):
-    import smtplib
-
-    FROM = user
-    TO = recipient if isinstance(recipient, list) else [recipient]
-    SUBJECT = subject
-    TEXT = body
-
-    # Prepare actual message
-    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.ehlo()
-        server.starttls()
-        server.login(user, pwd)
-        server.sendmail(FROM, TO, message)
-        server.close()
-        print('successfully sent the mail')
-    except:
-        print("failed to send mail")
-
-
 # future implement command line input
 # priceNotification = float(input())
 # priceBottom = float(input())
@@ -86,7 +63,7 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
     print(product_title.text)
     product_name = product_title.text  # get product name to send in email
     priceTable = soup.find('table', {'id': 'sh-osd__online-sellers-grid'})
-    print(priceTable)
+    # print(priceTable)
     priceRow = priceTable.find_all('th', {'class': 'sh-osd__total-price'})
     joinedList = pricelist1 + pricelist2
 
@@ -137,8 +114,8 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
     # simple algorithm: find cheapest one under our expectation price and above the bottom-price(avoid fake goods)
     # iterate df rows to find the lowest price under our input parameter(threshold)
     for index, row in df.iterrows():
-        if (float(row["price"]) < price_expectation):
-            if ((float(row["price"]) < price_lowest) & (float(row["price"]) > price_bottom)):
+        if float(row["price"]) < price_expectation:
+            if (float(row["price"]) < price_lowest) & (float(row["price"]) > price_bottom):
                 price_lowest = float(row["price"])
                 price_lowest_link = row["link"]
 
@@ -149,14 +126,13 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
     # section 3 : send email by SMTP
 
     # below is plain text email message
-    message = """\
-    Subject: {} price dropped!!!
 
+    message = """Subject: {} price dropped!!!
+
+    
     The lowest price is {}
     Go to the link immediately to take it back home now!!
-    {}
-
-    This message is sent from Python.""".format(product_name, price_lowest, price_lowest_link)
+    {}""".format(product_name, price_lowest, price_lowest_link)
 
     import smtplib
     import ssl
@@ -174,6 +150,6 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
         server.sendmail(sender, recipient, message)
 
 
+web = "https://www.google.com/shopping/product/11559963950601094589/offers?q=u2720q&sxsrf=ALiCzsY8lMoAqdhntc4_Yq9dwa2K5PKcgA:1663747241131&biw=1920&bih=1112&dpr=1.8&prds=eto:15989816060217023430_0,pid:2942878244053144922,rsk:PC_18376667549441860122&sa=X&ved=0ahUKEwjJ9Ou7taX6AhUJ2nMBHcYAA_wQ2SsIMA"
 # run the project file
-project(350, 250, "kevinwjh520@gmail.com",
-        "https://www.google.com/shopping/product/8300897844992207877/offers?q=airpods+pro&sxsrf=ALiCzsY0ht2PJUyebSBhgg2y9ERuw4feGg:1663642049364&biw=1728&bih=1001&dpr=2&prds=eto:2754270653443076419_0,pid:3006283522005438348,rsk:PC_7827190084446473420&sa=X&ved=0ahUKEwjYgfbLraL6AhUp8zgGHdWhA0cQ3q4ECPUL")
+project(900, 800, "kevinwjh520@gmail.com", web)
