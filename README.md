@@ -24,7 +24,11 @@ I input several parameters to the python function
     
 4. google shopping URL of the product(as following graph)
 
-https://s3.us-west-2.amazonaws.com/secure.notion-static.com/7ae9f9a9-6a52-474c-8669-380b038ff8f0/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220921%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220921T102458Z&X-Amz-Expires=86400&X-Amz-Signature=70fab215575a104eb5b8faa5fb198e6e87dc0fe3653dbb5e0b826861605943a4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject
+
+
+![alt text]([http://url/to/img.png](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/7ae9f9a9-6a52-474c-8669-380b038ff8f0/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220921%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220921T102458Z&X-Amz-Expires=86400&X-Amz-Signature=70fab215575a104eb5b8faa5fb198e6e87dc0fe3653dbb5e0b826861605943a4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject))
+
+
 
 ## Result
 
