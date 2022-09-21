@@ -9,16 +9,13 @@ import pandas as pd
 import smtplib, ssl
 
 
-# future implement command line input
-# priceNotification = float(input())
-# priceBottom = float(input())
-
 def project(priceNotification, priceBottom, email_address, shopping_url):
     # section 1
     # web scraping source 1 : individual websites
     # test purpose : in the future prepare for scraping static shopping websites like jb hifi or mwave
 
-    URL = 'https://www.dell.com/en-au/shop/dell-ultrasharp-27-4k-usb-c-hub-monitor-u2723qe/apd/210-bdzq/monitors-monitor-accessories'
+    URL = 'https://www.dell.com/en-au/shop/dell-ultrasharp-27-4k-usb-c-hub-monitor-u2723qe/apd/210-bdzq/monitors' \
+          '-monitor-accessories '
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
     results = soup.find('div', class_='ps-dell-price')
@@ -60,22 +57,22 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
     # Now, we could simply apply bs4 to html variable , like we always do
     soup = BeautifulSoup(html, "html.parser")
     product_title = soup.find("a", {'class': 'BvQan sh-t__title sh-t__title-pdp translate-content'})
-    print(product_title.text)
+    print("successfully scraped the product name: "+product_title.text)
     product_name = product_title.text  # get product name to send in email
     priceTable = soup.find('table', {'id': 'sh-osd__online-sellers-grid'})
-    # print(priceTable)
-    priceRow = priceTable.find_all('th', {'class': 'sh-osd__total-price'})
+    priceRow = priceTable.find_all('div', {'class': 'drzWO'})
     joinedList = pricelist1 + pricelist2
 
     # get/scrape url
     # add href to the url List
-    urls = priceTable.find_all('a', {'class': "Kl9jM UKKY9"})
+    urls = priceTable.find_all('a', {'class': "shntl FkMp"})
     base_url = 'https://www.google.com'
 
     # add full url into the url list
     for eachLink in urls:
         # we need to add base url in front of each link
         linkList.append(base_url + eachLink['href'])
+
 
     print(linkList)
 
@@ -84,7 +81,7 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
     for price in priceRow:
         pricelist3 = re.findall("\d+\.\d+", price.text)
         joinedList += pricelist3
-        print(re.findall("\d+\.\d+", price.text))
+        # print(re.findall("\d+\.\d+", price.text))
 
         count = count + 1
         if (count == 100):
@@ -150,6 +147,8 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
         server.sendmail(sender, recipient, message)
 
 
-web = "https://www.google.com/shopping/product/11559963950601094589/offers?q=u2720q&sxsrf=ALiCzsY8lMoAqdhntc4_Yq9dwa2K5PKcgA:1663747241131&biw=1920&bih=1112&dpr=1.8&prds=eto:15989816060217023430_0,pid:2942878244053144922,rsk:PC_18376667549441860122&sa=X&ved=0ahUKEwjJ9Ou7taX6AhUJ2nMBHcYAA_wQ2SsIMA"
+web1 = "https://www.google.com/shopping/product/8300897844992207877/offers?q=airpods+pro&prds=cid" \
+       ":8300897844992207877,cs:1,eto:2754270653443076419_0,pid:3006283522005438348,rsk:PC_7827190084446473420," \
+       "scoring:tp "
 # run the project file
-project(900, 800, "kevinwjh520@gmail.com", web)
+project(350, 200, "kevinwjh520@gmail.com", web1)
