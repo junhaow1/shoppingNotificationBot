@@ -2,6 +2,8 @@
 
 The shopping notification bot could automatically scrape websites for a specific product, monitors the price and send users an email when the price drops to the user’s budget.  
 
+## How to use
+
 For example I wanna buy an airpods pro. 
 
 I input several parameters to the python function 
@@ -24,7 +26,7 @@ I input several parameters to the python function
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7ae9f9a9-6a52-474c-8669-380b038ff8f0/Untitled.png)
 
-### Result
+## Result
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/329ad143-17da-474b-8a7b-0404b8a2d76d/Untitled.png)
 
