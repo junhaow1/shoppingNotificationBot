@@ -9,6 +9,29 @@ import pandas as pd
 import smtplib, ssl
 
 
+def send_email(user, pwd, recipient, subject, body):
+    import smtplib
+
+    FROM = user
+    TO = recipient if isinstance(recipient, list) else [recipient]
+    SUBJECT = subject
+    TEXT = body
+
+    # Prepare actual message
+    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.ehlo()
+        server.starttls()
+        server.login(user, pwd)
+        server.sendmail(FROM, TO, message)
+        server.close()
+        print('successfully sent the mail')
+    except:
+        print("failed to send mail")
+
+
 # future implement command line input
 # priceNotification = float(input())
 # priceBottom = float(input())
@@ -53,22 +76,23 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
     driver.get(url)
     # this is just to ensure that the page is loaded 
     # wait for one sec
-    time.sleep(1)
+    time.sleep(5)
     html = driver.page_source
     # this renders the JS code and stores all of the information in static HTML code. 
 
     # Now, we could simply apply bs4 to html variable , like we always do
     soup = BeautifulSoup(html, "html.parser")
-    product_title = soup.find('span', {'class': 'BvQan sh-t__title-pdp sh-t__title translate-content'})
+    product_title = soup.find("a", {'class': 'BvQan sh-t__title sh-t__title-pdp translate-content'})
     print(product_title.text)
-    product_name = product_title.text
+    product_name = product_title.text  # get product name to send in email
     priceTable = soup.find('table', {'id': 'sh-osd__online-sellers-grid'})
-    priceRow = priceTable.find_all('div', {'class': 'sh-osd__total-price'})
+    print(priceTable)
+    priceRow = priceTable.find_all('th', {'class': 'sh-osd__total-price'})
     joinedList = pricelist1 + pricelist2
 
     # get/scrape url
     # add href to the url List
-    urls = priceTable.find_all('a', {'class': "internal-link ZvnyBe shntl"})
+    urls = priceTable.find_all('a', {'class': "Kl9jM UKKY9"})
     base_url = 'https://www.google.com'
 
     # add full url into the url list
@@ -124,16 +148,6 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
 
     # section 3 : send email by SMTP
 
-    port = 587  # For starttls
-    smtp_server = "smtp.gmail.com"
-    sender_email = "kevinwjh521@gmail.com"
-    # input parameter
-    receiver_email = email_address
-    # receiver_email = "shouyinzuo@gmail.com"
-
-    # password = input("Type your password and press enter:")
-    password = '1234554321qwer'
-
     # below is plain text email message
     message = """\
     Subject: {} price dropped!!!
@@ -144,14 +158,20 @@ def project(priceNotification, priceBottom, email_address, shopping_url):
 
     This message is sent from Python.""".format(product_name, price_lowest, price_lowest_link)
 
-    # smtp protocol to send mails through gmail server
-    context = ssl.create_default_context()
+    import smtplib
+    import ssl
+    port = 587
+    smtp_server = "smtp-mail.outlook.com"
+    sender = "kevinwjh520@outlook.com"
+    recipient = "kevinwjh520@gmail.com"
+    sender_password = "1234554321qwer"
+
+    SSL_context = ssl.create_default_context()
     with smtplib.SMTP(smtp_server, port) as server:
-        server.ehlo()
-        server.starttls(context=context)
-        server.ehlo()
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+        server.starttls(context=SSL_context)
+        verify = False
+        server.login(sender, sender_password)
+        server.sendmail(sender, recipient, message)
 
 
 # run the project file
